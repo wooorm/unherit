@@ -1,0 +1,34 @@
+{
+  "name": "unherit",
+  "main": "unherit.js",
+  "description": "Clone a constructor without affecting the super-class",
+  "license": "MIT",
+  "keywords": [
+    "clone",
+    "super",
+    "class",
+    "constructor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/unherit.git"
+  },
+  "authors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "ignore": [
+    ".*",
+    "*.log",
+    "*.md",
+    "*.sh",
+    "*.svg",
+    "build/",
+    "components/",
+    "coverage/",
+    "node_modules/",
+    "component.json",
+    "package.json",
+    "build.js",
+    "index.js"
+  ]
+}

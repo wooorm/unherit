@@ -1,0 +1,17 @@
+{
+  "name": "unherit",
+  "version": "0.0.0",
+  "description": "Clone a constructor without affecting the super-class",
+  "license": "MIT",
+  "keywords": [
+    "clone",
+    "super",
+    "class",
+    "constructor"
+  ],
+  "dependencies": {},
+  "repository": "wooorm/unherit",
+  "scripts": [
+    "unherit.js"
+  ]
+}
