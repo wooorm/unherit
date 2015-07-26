@@ -24,4 +24,10 @@ describe('unherit(Super)', function () {
         assert.equal(new Emitter().constructor, Emitter);
         assert.equal(new EventEmitter().constructor, EventEmitter);
     });
+
+    it('should fool `instanceof` checks', function () {
+        var Emitter = unherit(EventEmitter);
+
+        assert(new Emitter() instanceof EventEmitter);
+    });
 });

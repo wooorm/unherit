@@ -23,52 +23,7 @@
  */
 
 var clone = require('clone');
-
-/**
- * Set `"constructor"` on `proto` to `Constructor`.
- *
- * Uses `Object.create`.
- *
- * @private
- * @param {Object} proto - Super-class prototype.
- * @param {Function} Constructor
- * @return {Object} - `proto` with a pached `constructor`.
- */
-function define(proto, Constructor) {
-    return Object.create(proto, {
-      'constructor': {
-        'value': Constructor,
-        'enumerable': false,
-        'writable': true,
-        'configurable': true
-      }
-    });
-}
-
-/* istanbul ignore next */
-/**
- * Set `"constructor"` on `proto` to `Constructor`.
- *
- * Manipulates `proto`.
- *
- * @private
- * @param {Object} proto - Super-class prototype.
- * @param {Function} Constructor
- * @return {Object} - `proto` with a pached `constructor`.
- */
-function defineShim(proto, Constructor) {
-    proto.constructor = Constructor;
-
-    return proto;
-}
-
-/*
- * Method to used based on environment.
- */
-
-var method = typeof Object.create === 'function' ?
-    define :
-    /* istanbul ignore next */ defineShim;
+var inherits = require('inherits');
 
 /**
  * Create a custom constructor which can be modified
@@ -87,7 +42,17 @@ function unherit(Super) {
         return Super.apply(this, arguments);
     }
 
-    Constructor.prototype = method(clone(Super.prototype), Constructor);
+    /*
+     * Both do duplicate work. However, cloning the
+     * prototype ensures clonable things are cloned
+     * and thus used. The `inherits` call ensures
+     * `instanceof` still thinks an instance subclasses
+     * `Super`.
+     */
+
+    Constructor.prototype = clone(Super.prototype);
+
+    inherits(Constructor, Super);
 
     return Constructor;
 }

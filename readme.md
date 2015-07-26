@@ -28,8 +28,9 @@ Emitter.prototype.defaultMaxListeners = 0;
 /* Now, all instances of `Emitter` have no maximum
  * listeners, without affecting other `EventEmitter`s. */
 
-assert.equal(new Emitter().defaultMaxListeners, 0); // true
-assert.equal(new EventEmitter().defaultMaxListeners, undefined); // true
+assert(new Emitter().defaultMaxListeners === 0); // true
+assert(new EventEmitter().defaultMaxListeners === undefined); // true
+assert(new Emitter() instanceof EventEmitter); // true
 ```
 
 ## API

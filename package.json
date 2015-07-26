@@ -9,7 +9,9 @@
     "class",
     "constructor"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "inherits": "^2.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/unherit.git"
@@ -47,7 +49,7 @@
     "lint": "npm run lint-api && npm run lint-style",
     "make": "npm run lint && npm run test-coverage",
     "build-md": "mdast . --quiet",
-    "build-bundle": "browserify index.js -s unherit > unherit.js",
+    "build-bundle": "browserify index.js --bare -s unherit > unherit.js",
     "postbuild-bundle": "esmangle unherit.js > unherit.min.js",
     "build": "npm run build-md && npm run build-bundle"
   }
