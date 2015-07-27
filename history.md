@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+1.0.3 / 2015-07-27
+==================
+
+*   Fix missing dependency ([49860a0](https://github.com/wooorm/unherit/commit/49860a0))
+
 1.0.2 / 2015-07-27
 ==================
 
