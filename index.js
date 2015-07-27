@@ -36,9 +36,21 @@ var inherits = require('inherits');
  */
 function unherit(Super) {
     /**
-     * Constructor.
+     * Constructor accepting a single argument,
+     * which itself is an `arguments` object.
      */
-    function Constructor() {
+    function From(parameters) {
+        return Super.apply(this, parameters);
+    }
+
+    /**
+     * Constructor accepting variadic arguments.
+     */
+    function Of() {
+        if (!(this instanceof Of)) {
+            return new From(arguments);
+        }
+
         return Super.apply(this, arguments);
     }
 
@@ -50,11 +62,12 @@ function unherit(Super) {
      * `Super`.
      */
 
-    Constructor.prototype = clone(Super.prototype);
+    Of.prototype = clone(Super.prototype);
 
-    inherits(Constructor, Super);
+    inherits(Of, Super);
+    inherits(From, Of);
 
-    return Constructor;
+    return Of;
 }
 
 /*

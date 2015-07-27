@@ -30,4 +30,33 @@ describe('unherit(Super)', function () {
 
         assert(new Emitter() instanceof EventEmitter);
     });
+
+    it('should fool `instanceof` checks without `new`', function () {
+        /**
+         * Constructor which internally uses an `instanceof`
+         * check.
+         */
+        function A(one, two, three) {
+            assert.strictEqual(one, 'foo');
+            assert.strictEqual(two, 'bar');
+            assert.strictEqual(three, 'baz');
+
+            /* istanbul ignore if */
+            if (!(this instanceof A)) {
+                assert(false);
+            }
+
+            this.values = [].slice.call(arguments);
+        }
+
+        var B = unherit(A);
+
+        /* eslint-disable new-cap */
+        var b = B('foo', 'bar', 'baz');
+        /* eslint-enable new-cap */
+
+        assert(b instanceof A);
+        assert(b instanceof B);
+        assert.deepEqual(b.values, ['foo', 'bar', 'baz']);
+    });
 });
