@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+1.0.2 / 2015-07-27
+==================
+
+*   Fix for `instanceof` checks without `new` in super ([d1ab727](https://github.com/wooorm/unherit/commit/d1ab727))
+
 1.0.1 / 2015-07-26
 ==================
 
