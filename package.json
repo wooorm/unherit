@@ -10,6 +10,7 @@
     "constructor"
   ],
   "dependencies": {
+    "clone": "^1.0.1",
     "inherits": "^2.0.1"
   },
   "repository": {
@@ -22,8 +23,6 @@
   ],
   "devDependencies": {
     "browserify": "^11.0.0",
-    "clone": "^1.0.1",
-    "diff": "^1.0.0",
     "eslint": "^0.24.0",
     "esmangle": "^1.0.0",
     "istanbul": "^0.3.0",
