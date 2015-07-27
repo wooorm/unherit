@@ -1,4 +1,4 @@
-# unherit [![Build Status](https://img.shields.io/travis/wooorm/unherit.svg?style=flat)](https://travis-ci.org/wooorm/unherit) [![Coverage Status](https://img.shields.io/coveralls/wooorm/unherit.svg?style=flat)](https://coveralls.io/r/wooorm/unherit?branch=master)
+# unherit [![Build Status](https://img.shields.io/travis/wooorm/unherit.svg)](https://travis-ci.org/wooorm/unherit) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/unherit.svg)](https://codecov.io/github/wooorm/unherit?branch=master)
 
 Create a custom constructor which can be modified without affecting the
 original class.
