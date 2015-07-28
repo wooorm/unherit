@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+1.0.4 / 2015-07-28
+==================
+
+*   Fix [d1ab727](https://github.com/wooorm/unherit/commit/d1ab727) ([e11553f](https://github.com/wooorm/unherit/commit/e11553f))
+
 1.0.3 / 2015-07-27
 ==================
 
