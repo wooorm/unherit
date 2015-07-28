@@ -35,6 +35,10 @@ var inherits = require('inherits');
  *   class.
  */
 function unherit(Super) {
+    var base = clone(Super.prototype);
+    var result;
+    var key;
+
     /**
      * Constructor accepting a single argument,
      * which itself is an `arguments` object.
@@ -54,6 +58,9 @@ function unherit(Super) {
         return Super.apply(this, arguments);
     }
 
+    inherits(Of, Super);
+    inherits(From, Of);
+
     /*
      * Both do duplicate work. However, cloning the
      * prototype ensures clonable things are cloned
@@ -62,10 +69,11 @@ function unherit(Super) {
      * `Super`.
      */
 
-    Of.prototype = clone(Super.prototype);
+    result = Of.prototype;
 
-    inherits(Of, Super);
-    inherits(From, Of);
+    for (key in base) {
+        result[key] = base[key];
+    }
 
     return Of;
 }
