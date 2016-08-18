@@ -1,92 +1,91 @@
-'use strict';
-
-/* eslint-env mocha */
-
-/*
- * Dependencies.
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module unherit
+ * @fileoverview Test suite for `unherit`.
  */
 
-var assert = require('assert');
+'use strict';
+
+/* Dependencies. */
 var EventEmitter = require('events').EventEmitter;
+var test = require('tape');
 var unherit = require('./');
 
-describe('unherit(Super)', function () {
-    it('should work', function () {
-        var Emitter = unherit(EventEmitter);
+/* Tests. */
+test('unherit(Super)', function (t) {
+  var Emitter = unherit(EventEmitter);
 
-        assert.equal(Emitter.prototype.defaultMaxListeners, undefined);
+  t.equal(Emitter.prototype.defaultMaxListeners, undefined);
 
-        Emitter.prototype.defaultMaxListeners = 0;
+  Emitter.prototype.defaultMaxListeners = 0;
 
-        assert.equal(new Emitter().defaultMaxListeners, 0);
-        assert.equal(new EventEmitter().defaultMaxListeners, undefined);
+  t.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)');
+  t.equal(new EventEmitter().defaultMaxListeners, undefined, 'should work (2)');
 
-        assert.equal(new Emitter().constructor, Emitter);
-        assert.equal(new EventEmitter().constructor, EventEmitter);
-    });
+  t.equal(new Emitter().constructor, Emitter, 'should work (3)');
+  t.equal(new EventEmitter().constructor, EventEmitter, 'should work (4)');
 
-    it('should fool `instanceof` checks', function () {
-        var Emitter = unherit(EventEmitter);
+  Emitter = unherit(EventEmitter);
 
-        assert(new Emitter() instanceof EventEmitter);
-    });
+  t.ok(new Emitter() instanceof EventEmitter, 'should fool `instanceof` checks');
 
-    it('should fool `instanceof` checks without `new`', function () {
-        /**
-         * Constructor which internally uses an `instanceof`
-         * check.
-         */
-        function A(one, two, three) {
-            assert.strictEqual(one, 'foo');
-            assert.strictEqual(two, 'bar');
-            assert.strictEqual(three, 'baz');
+  /**
+   * Constructor which internally uses an `instanceof`
+   * check.
+   */
+  function A(one, two, three) {
+    t.equal(one, 'foo');
+    t.equal(two, 'bar');
+    t.equal(three, 'baz');
+    t.ok(this instanceof A);
 
-            /* istanbul ignore if */
-            if (!(this instanceof A)) {
-                assert(false);
-            }
+    this.values = [].slice.call(arguments);
+  }
 
-            this.values = [].slice.call(arguments);
-        }
+  var B = unherit(A);
 
-        var B = unherit(A);
+  /* eslint-disable babel/new-cap */
+  var b = B('foo', 'bar', 'baz');
+  /* eslint-enable babel/new-cap */
 
-        /* eslint-disable new-cap */
-        var b = B('foo', 'bar', 'baz');
-        /* eslint-enable new-cap */
+  t.ok(b instanceof A, 'should fool `instanceof` without `new` (1)');
+  t.ok(b instanceof B, 'should fool `instanceof` without `new` (2)');
 
-        assert(b instanceof A);
-        assert(b instanceof B);
-        assert.deepEqual(b.values, ['foo', 'bar', 'baz']);
-    });
+  t.deepEqual(
+    b.values,
+    ['foo', 'bar', 'baz'],
+    'should fool `instanceof` without `new` (3)'
+  );
 
-    it('shouldn’t fail on inheritance', function () {
-        var C;
-        var D;
+  var E;
+  var F;
 
-        function A() {}
+  function C() {}
 
-        A.prototype.values = [1, 2];
+  C.prototype.values = [1, 2];
 
-        function Proto() {}
+  function Proto() {}
 
-        function B() {}
-        Proto.prototype = A.prototype;
+  function D() {}
+  Proto.prototype = C.prototype;
 
-        B.prototype = new Proto();
-        B.prototype.values = [1, 2, 3];
+  D.prototype = new Proto();
+  D.prototype.values = [1, 2, 3];
 
-        C = unherit(B);
+  E = unherit(D);
 
-        /* This failed in 1.0.4 */
-        assert.deepEqual(C.prototype.values, [1, 2, 3]);
-        assert.deepEqual(new C().values, [1, 2, 3]);
+  /* This failed in 1.0.4 */
+  t.deepEqual(E.prototype.values, [1, 2, 3], 'shouldn’t fail on inheritance (1)');
+  t.deepEqual(new E().values, [1, 2, 3], 'shouldn’t fail on inheritance (2)');
 
-        C.prototype.values.push(4);
+  E.prototype.values.push(4);
 
-        D = unherit(B);
+  F = unherit(D);
 
-        assert.deepEqual(D.prototype.values, [1, 2, 3]);
-        assert.deepEqual(new D().values, [1, 2, 3]);
-    });
+  t.deepEqual(F.prototype.values, [1, 2, 3], 'shouldn clone values (1)');
+  t.deepEqual(new F().values, [1, 2, 3], 'shouldn clone values (2)');
+
+  t.end();
 });

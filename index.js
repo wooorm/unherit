@@ -5,25 +5,16 @@
  * @module unherit
  * @fileoverview Create a custom constructor which can be modified
  *   without affecting the original class.
- * @example
- *   var EventEmitter = require('events').EventEmitter;
- *   var Emitter = unherit(EventEmitter);
- *   // Create a private class which acts just like
- *   // `EventEmitter`.
- *
- *   Emitter.prototype.defaultMaxListeners = 0;
- *   // Now, all instances of `Emitter` have no maximum
- *   // listeners, without affecting other `EventEmitter`s.
  */
 
 'use strict';
 
-/*
- * Dependencies.
- */
-
+/* Dependencies. */
 var xtend = require('xtend');
 var inherits = require('inherits');
+
+/* Expose. */
+module.exports = unherit;
 
 /**
  * Create a custom constructor which can be modified
@@ -35,48 +26,42 @@ var inherits = require('inherits');
  *   class.
  */
 function unherit(Super) {
-    var result;
-    var key;
-    var value;
+  var result;
+  var key;
+  var value;
 
-    /**
-     * Constructor accepting a single argument,
-     * which itself is an `arguments` object.
-     */
-    function From(parameters) {
-        return Super.apply(this, parameters);
+  inherits(Of, Super);
+  inherits(From, Of);
+
+  /* Clone values. */
+  result = Of.prototype;
+
+  for (key in result) {
+    value = result[key];
+
+    if (value && typeof value === 'object') {
+      result[key] = 'concat' in value ? value.concat() : xtend(value);
+    }
+  }
+
+  return Of;
+
+  /**
+   * Constructor accepting a single argument,
+   * which itself is an `arguments` object.
+   */
+  function From(parameters) {
+    return Super.apply(this, parameters);
+  }
+
+  /**
+   * Constructor accepting variadic arguments.
+   */
+  function Of() {
+    if (!(this instanceof Of)) {
+      return new From(arguments);
     }
 
-    /**
-     * Constructor accepting variadic arguments.
-     */
-    function Of() {
-        if (!(this instanceof Of)) {
-            return new From(arguments);
-        }
-
-        return Super.apply(this, arguments);
-    }
-
-    inherits(Of, Super);
-    inherits(From, Of);
-
-    /* Clone values. */
-    result = Of.prototype;
-
-    for (key in result) {
-        value = result[key];
-
-        if (value && typeof value === 'object') {
-            result[key] = 'concat' in value ? value.concat() : xtend(value);
-        }
-    }
-
-    return Of;
+    return Super.apply(this, arguments);
+  }
 }
-
-/*
- * Expose.
- */
-
-module.exports = unherit;
