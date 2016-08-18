@@ -59,4 +59,34 @@ describe('unherit(Super)', function () {
         assert(b instanceof B);
         assert.deepEqual(b.values, ['foo', 'bar', 'baz']);
     });
+
+    it('shouldn’t fail on inheritance', function () {
+        var C;
+        var D;
+
+        function A() {}
+
+        A.prototype.values = [1, 2];
+
+        function Proto() {}
+
+        function B() {}
+        Proto.prototype = A.prototype;
+
+        B.prototype = new Proto();
+        B.prototype.values = [1, 2, 3];
+
+        C = unherit(B);
+
+        /* This failed in 1.0.4 */
+        assert.deepEqual(C.prototype.values, [1, 2, 3]);
+        assert.deepEqual(new C().values, [1, 2, 3]);
+
+        C.prototype.values.push(4);
+
+        D = unherit(B);
+
+        assert.deepEqual(D.prototype.values, [1, 2, 3]);
+        assert.deepEqual(new D().values, [1, 2, 3]);
+    });
 });

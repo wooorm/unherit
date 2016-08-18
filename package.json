@@ -10,8 +10,8 @@
     "constructor"
   ],
   "dependencies": {
-    "clone": "^1.0.1",
-    "inherits": "^2.0.1"
+    "inherits": "^2.0.1",
+    "xtend": "^4.0.1"
   },
   "repository": {
     "type": "git",

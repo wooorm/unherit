@@ -22,7 +22,7 @@
  * Dependencies.
  */
 
-var clone = require('clone');
+var xtend = require('xtend');
 var inherits = require('inherits');
 
 /**
@@ -35,9 +35,9 @@ var inherits = require('inherits');
  *   class.
  */
 function unherit(Super) {
-    var base = clone(Super.prototype);
     var result;
     var key;
+    var value;
 
     /**
      * Constructor accepting a single argument,
@@ -61,18 +61,15 @@ function unherit(Super) {
     inherits(Of, Super);
     inherits(From, Of);
 
-    /*
-     * Both do duplicate work. However, cloning the
-     * prototype ensures clonable things are cloned
-     * and thus used. The `inherits` call ensures
-     * `instanceof` still thinks an instance subclasses
-     * `Super`.
-     */
-
+    /* Clone values. */
     result = Of.prototype;
 
-    for (key in base) {
-        result[key] = base[key];
+    for (key in result) {
+        value = result[key];
+
+        if (value && typeof value === 'object') {
+            result[key] = 'concat' in value ? value.concat() : xtend(value);
+        }
     }
 
     return Of;
