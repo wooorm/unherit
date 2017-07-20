@@ -9,6 +9,12 @@
     "class",
     "constructor"
   ],
+  "repository": "wooorm/unherit",
+  "bugs": "https://github.com/wooorm/unherit/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
   "files": [
     "index.js"
   ],
@@ -16,12 +22,6 @@
     "inherits": "^2.0.1",
     "xtend": "^4.0.1"
   },
-  "repository": "https://github.com/wooorm/unherit",
-  "bugs": "https://github.com/wooorm/unherit/issues",
-  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
-  "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
-  ],
   "devDependencies": {
     "browserify": "^14.0.0",
     "esmangle": "^1.0.1",
@@ -52,6 +52,8 @@
     ]
   },
   "remarkConfig": {
-    "plugins": ["preset-wooorm"]
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
