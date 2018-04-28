@@ -1,10 +1,8 @@
 'use strict'
 
-/* Dependencies. */
 var xtend = require('xtend')
 var inherits = require('inherits')
 
-/* Expose. */
 module.exports = unherit
 
 /* Create a custom constructor which can be modified
