@@ -4,19 +4,12 @@ node_js:
 - '8.0'
 after_success: bash <(curl -s https://codecov.io/bash)
 deploy:
-  - provider: npm
-    email: tituswormer@gmail.com
-    api_key:
-      secure: GB6dlGIyj4VkvUVRmQCGf9UN1cEhKES6g/yBrZHrNfCVphKn+ABM0LeSDJdXW7hh6ZNG9m3cZRACmEdAAOZJSOLh55va743g6tustDSecpDHrNeq6QQE+30/PBldoILCkp7U2NEkmq2X+cJqrr5+v6a83jbWfNcP3WXX7OeCAP3bhxJerkPnZ1jL0/bxe4c7lOQId6eUFwDmVpHeNVUDucdiQpaAfnyoZBeOpJKlJjpB90gp/qyHtiVLiHIjIS3/i9dgwS9bQ6L+cuvnWApo26nCAYoYZ/X5IVDUpkp36moIhIejQ3EY6ShSGovKcLqbWVIOU4VCncJJrH+/3JDLddWyFbj+3ULO8BdXnICeZxf8vSeYHq6w4DXMlY1yI25sqeiVVVq4BuA8xc7xlKcTbDVIxhKIxAPkJ0DuhsG4ZnJAnOHX6hZJzlN07YBsZZ7gwZQ577+nmttw0fT5LwazGqRjiuInHUOlctJ6TX3z7Rv5Xslg1Ol7IZbDoqdb7CUWo3BmnlP3PdfxGWwFUdOwZG9EPWHz0YiMNeN+zXFb5DGi/NvoY6K/uHwQ27UU/x48X47DBJpt/nIx1mJlaGhTiu0vOS1JDISNYvQb4Z8OOsrQLfDAlP+XK3+ArdjNwdZ7D4uGOk+4m+JOwSCjd17zzwKKKI2I0aecQBCtkyawB6c=
-    on:
-      tags: true
-      node: '4.0'
-  - provider: releases
-    api_key:
-      secure: VgV9X9+55NeSE5qw3QmD+Ielg0kAkXD/dQY55IGnsur/KprwrGPorNfyDlTlEisfsF/J3CHejwf27Kf+R8mV2xSlDcDbd4X58nKfKxf+qd+G8T9HKmwf0lVOgd2BREWJYEx2ozYTAEba93jMRnbIkcbH3u1cQYD7lepOcnd2HpsWfTK1IqDEphz95wb48dh/oSfMB6wI4itvVpyXyrr7ZuYhnFoOFnPdRtJWcgRAAWpB+iTjzd0aya3MUlGfNvZuHsQIotL3rAtwd8l4NohtfxLSLSeHlN85wnox0gW3bjjtJ6Lv0pUdgr0E7GBeCMp5QuhMELh4CG2h7f+8L8N7S8mcFST3klQjm0Ec7HPra3YkmmQ6kvj9XpIHGM2yK9SCeoWh/65x5lOONp9pWxk8Ad0XcCTZAMQlQlHjsIKLvfG1Vw0UuBt0Iyz2QNS8+hk4bq2DW+5uZUi3fhbNqfa7pgHY9gqicz6f9LaHB8Rc4CfZlSwjDaaqK5TQgpQeKm03iRet20tJq89+UBAP9Lje2QGATa7UFHMwYoa9PoOydS/wPLbgi9zRgnse94GU1G0Rn4Vjewyc9+/ut8UKVhAU3d7TdtExAkUjjdeX9CVgpCvOcf/DGolSmQbm6T1erZ/dlcEYTfqLeHv9JIDU4JADjkSWjXeJQjqitAObINfQZLA=
-    file:
-      - "unherit.js"
-      - "unherit.min.js"
-    on:
-      tags: true
-      node: '8.0'
+  provider: releases
+  api_key:
+    secure: VgV9X9+55NeSE5qw3QmD+Ielg0kAkXD/dQY55IGnsur/KprwrGPorNfyDlTlEisfsF/J3CHejwf27Kf+R8mV2xSlDcDbd4X58nKfKxf+qd+G8T9HKmwf0lVOgd2BREWJYEx2ozYTAEba93jMRnbIkcbH3u1cQYD7lepOcnd2HpsWfTK1IqDEphz95wb48dh/oSfMB6wI4itvVpyXyrr7ZuYhnFoOFnPdRtJWcgRAAWpB+iTjzd0aya3MUlGfNvZuHsQIotL3rAtwd8l4NohtfxLSLSeHlN85wnox0gW3bjjtJ6Lv0pUdgr0E7GBeCMp5QuhMELh4CG2h7f+8L8N7S8mcFST3klQjm0Ec7HPra3YkmmQ6kvj9XpIHGM2yK9SCeoWh/65x5lOONp9pWxk8Ad0XcCTZAMQlQlHjsIKLvfG1Vw0UuBt0Iyz2QNS8+hk4bq2DW+5uZUi3fhbNqfa7pgHY9gqicz6f9LaHB8Rc4CfZlSwjDaaqK5TQgpQeKm03iRet20tJq89+UBAP9Lje2QGATa7UFHMwYoa9PoOydS/wPLbgi9zRgnse94GU1G0Rn4Vjewyc9+/ut8UKVhAU3d7TdtExAkUjjdeX9CVgpCvOcf/DGolSmQbm6T1erZ/dlcEYTfqLeHv9JIDU4JADjkSWjXeJQjqitAObINfQZLA=
+  file:
+    - "unherit.js"
+    - "unherit.min.js"
+  on:
+    tags: true
+    node: '8.0'
