@@ -1,6 +1,6 @@
 {
   "name": "unherit",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Clone a constructor without affecting the super-class",
   "license": "MIT",
   "keywords": [
