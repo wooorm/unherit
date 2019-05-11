@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-- lts/boron
-- node
+  - lts/dubnium
+  - node
 after_success: bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: l0tzWp3uoIIqSMfKuh5pXIjEEQIjlfukMA63WNUNRw390UC5P0OunH5owrdQUGFHOYxkSsqNRJaM5g56uto8ixwlWcvB69mr9iGxYf+ZoxZkP8zjWENsLe6goYyTVXNHC14OSSqnpAg0yWYHBOtTxpQc78o93q4VNo0lVBRATTUUiZ5fVVvQ8Gx0XcVwZTNEag5bODsqsxKoRdqLLTAv2aljiq3DOp89JcxNvYOhUDnKntp6/vqUUkIcYkWjc9FaV8bVpgb4zzd7Ipa90QfsZzH+IteW9EOy9hC29XagVG40et+FojG2mQdit9XDWF9XbQkPJ/QevmKEb+6AZ95cPlNgrrxuv76/eyFFEcLoWKUYhlqsTFxr5kDVZxDreTQcFkaDhUODiOTUUm7312wVWTeKovfhQwsLUwi8TzBgukfmun7XIStcUTqNrF6kmbo1jDLq7Btd44uGPZnTPiu3F//Be/kRUzfgiSpEaI7aZaOBnCrLHuP0kEtPSzk4eZ4idK7iRZ/hSVnyas4P4o1jg7lrLuMmiqfM9NaxdNGgjJqkbP9oWrWQ7aooUKsQ0fvSLJdRaCeBXJ7EuRBXKJjWXhovfg4cDi2fXP9zG3kKzyLM16d2ZBdJVtKDJn0BXE80EjC4rWqVxH2vcEqwUPVqYX39lGniJGKyU7LlA77bFds=
+    secure: RWSe+VT69ZWtHboTg0GdMKi3QK+VZINO1yG19tZhNGQjCARo0j2k604rxgiCEeUpVEkDGG600J5cf9Xsc+AsF2beUhKtpcKAc0hyRzTgSfguq0L9TLVobVQTk6Zx2r7cqlnx/Jnhc6A+YrcNNAXiJNsA5K0/xAhEXo/Dx6N1BbnC50t+X0yPrN3khumkheiBzQ9YtSwXLa7jqopEcDWsQIwGIsN/dJEOy+fZq0DMHaRx/oBW0HrZWYdvcozZ8tY+lF7oDnxPUHmJ8UE3LP/kuesnK7lPj/o6SZIFJJk6IyGGlaGEgjYM7yz4WOmsxW9MhqTtDhaYsseyspTQSbrP15UBVp4VEiEKlLJbJA8EqzqFu+DTA60+Vz8iCF42gvRTOlUix9U2Gq+BSdIUjCzPJw84lOR1YtALjQGgbmfvXR5myaXuWVc5U8KCqdb4q0skHupDbawt+jdMlkFIcx5B4YLHnhK2Re9/3PWkPdRjqqYfGpV0Dq7qc3OPX37u7ihkrGmleZ30q/yqHUL21FdYxyd0H+ruLTYNg/TqxbzjovBT7OQlXjcTq5Mi9zx4WJ+ZtRWsFf3BT2hqKs8PRkLfnS4x3gEB8wnnljUn6jKy1yk8PbFF7/QZWUXNrEo0QzxacvsqHYt8mcMs0i3lp22GlTUAqEDUPLcnL4brbo+Z0eU=
   file:
-    - "unherit.js"
-    - "unherit.min.js"
+    - 'unherit.js'
+    - 'unherit.min.js'
   on:
     tags: true
