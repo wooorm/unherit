@@ -62,6 +62,6 @@ without affecting the original class.
 
 [npm-install]: https://docs.npmjs.com/cli/install
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
