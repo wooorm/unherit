@@ -1,4 +1,9 @@
-# unherit [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# unherit
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 Create a custom constructor which can be modified without affecting the
 original class.
@@ -51,13 +56,21 @@ without affecting the original class.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/unherit.svg
+[build-badge]: https://img.shields.io/travis/wooorm/unherit.svg
 
-[travis]: https://travis-ci.org/wooorm/unherit
+[build]: https://travis-ci.org/wooorm/unherit
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/unherit.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/unherit.svg
 
-[codecov]: https://codecov.io/github/wooorm/unherit
+[coverage]: https://codecov.io/github/wooorm/unherit
+
+[downloads-badge]: https://img.shields.io/npm/dm/unherit.svg
+
+[downloads]: https://www.npmjs.com/package/unherit
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/unherit.svg
+
+[size]: https://bundlephobia.com/result?p=unherit
 
 [npm-install]: https://docs.npmjs.com/cli/install
 
