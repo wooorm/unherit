@@ -21,8 +21,7 @@ test('unherit(Super)', function(t) {
 
   t.ok(new Emitter() instanceof EventEmitter, 'should fool `instanceof` checks')
 
-  /* Constructor which internally uses an `instanceof`
-   * check. */
+  // Constructor which internally uses an `instanceof` check.
   function A(one, two, three) {
     t.equal(one, 'foo')
     t.equal(two, 'bar')
@@ -63,7 +62,7 @@ test('unherit(Super)', function(t) {
 
   E = unherit(D)
 
-  /* This failed in 1.0.4 */
+  // This failed in 1.0.4
   t.deepEqual(
     E.prototype.values,
     [1, 2, 3],

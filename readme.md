@@ -17,13 +17,12 @@ npm install unherit
 var EventEmitter = require('events').EventEmitter
 var unherit = require('unherit')
 
-/* Create a private class which acts just like
- * `EventEmitter`. */
+// Create a private class which acts just like `EventEmitter`.
 var Emitter = unherit(EventEmitter)
 
 Emitter.prototype.defaultMaxListeners = 0
-/* Now, all instances of `Emitter` have no maximum
- * listeners, without affecting other `EventEmitter`s. */
+// Now, all instances of `Emitter` have no maximum listeners, without affecting
+// other `EventEmitter`s.
 
 new Emitter().defaultMaxListeners === 0 // => true
 new EventEmitter().defaultMaxListeners === undefined // => true
