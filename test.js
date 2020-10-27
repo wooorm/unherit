@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter
 var test = require('tape')
 var unherit = require('.')
 
-test('unherit(Super)', function(t) {
+test('unherit(Super)', function (t) {
   var Emitter = unherit(EventEmitter)
 
   t.equal(Emitter.prototype.defaultMaxListeners, undefined)

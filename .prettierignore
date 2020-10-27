@@ -1,3 +1,5 @@
 coverage/
 unherit.js
 unherit.min.js
+*.json
+*.md
