@@ -20,8 +20,14 @@ test('unherit(Super)', function (t) {
   Emitter = unherit(EventEmitter)
 
   t.ok(new Emitter() instanceof EventEmitter, 'should fool `instanceof` checks')
-
-  // Constructor which internally uses an `instanceof` check.
+  /**
+   * Constructor which internally uses an `instanceof` check.
+   *
+   * @constructor
+   * @param {string} one
+   * @param {string} two
+   * @param {string} three
+   */
   function A(one, two, three) {
     t.equal(one, 'foo')
     t.equal(two, 'bar')
@@ -33,7 +39,9 @@ test('unherit(Super)', function (t) {
 
   var B = unherit(A)
 
-  var b = new B('foo', 'bar', 'baz')
+  // @ts-ignore typescript wants new used with constructor
+  // eslint-disable-next-line new-cap
+  var b = B('foo', 'bar', 'baz')
 
   t.ok(b instanceof A, 'should fool `instanceof` without `new` (1)')
   t.ok(b instanceof B, 'should fool `instanceof` without `new` (2)')
