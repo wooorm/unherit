@@ -56,9 +56,9 @@ affecting the original class.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/unherit.svg
+[build-badge]: https://github.com/wooorm/unherit/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/unherit
+[build]: https://github.com/wooorm/unherit/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/unherit.svg
 
