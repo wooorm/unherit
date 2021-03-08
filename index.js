@@ -1,7 +1,5 @@
 import inherits from 'inherits'
 
-// Create a custom constructor which can be modified without affecting the
-// original class.
 export function unherit(Super) {
   var proto
   var key
@@ -25,8 +23,12 @@ export function unherit(Super) {
 
   return Of
 
-  // Constructor accepting a single argument, which itself is an `arguments`
-  // object.
+  /** Constructor accepting a single argument, which itself is an `arguments`
+   * object.
+   *
+   * @param {any[]} parameters
+   * @returns {any}
+   */
   function From(parameters) {
     return Super.apply(this, parameters)
   }
@@ -35,6 +37,7 @@ export function unherit(Super) {
   function Of() {
     return this instanceof Of
       ? Super.apply(this, arguments)
-      : new From(arguments)
+      : // @ts-ignore it’s wrong.
+        new From(arguments)
   }
 }

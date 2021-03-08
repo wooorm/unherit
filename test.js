@@ -9,6 +9,7 @@ test('unherit(Super)', function (t) {
 
   Emitter.prototype.defaultMaxListeners = 0
 
+  // @ts-ignore TS is wrong.
   t.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)')
   t.equal(new EventEmitter().defaultMaxListeners, undefined, 'should work (2)')
 
