@@ -1,8 +1,5 @@
 .DS_Store
 *.log
-.nyc_output/
 coverage/
 node_modules/
-unherit.js
-unherit.min.js
 yarn.lock

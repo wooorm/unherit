@@ -10,6 +10,9 @@ class.
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -19,8 +22,8 @@ npm install unherit
 ## Use
 
 ```js
-var EventEmitter = require('events').EventEmitter
-var unherit = require('unherit')
+import {EventEmitter} from 'events'
+import {unherit} from 'unherit'
 
 // Create a private class which acts just like `EventEmitter`.
 var Emitter = unherit(EventEmitter)
@@ -36,19 +39,13 @@ new Emitter() instanceof EventEmitter // => true
 
 ## API
 
+This package exports the following identifiers: `unherit`.
+There is no default export.
+
 ### `unherit(Super)`
 
-Create a custom constructor which can be modified without affecting the original
-class.
-
-###### Parameters
-
-*   `Super` (`Function`) — Super-class
-
-###### Returns
-
-`Function` — Constructor acting like `Super`, which can be modified without
-affecting the original class.
+Create a custom constructor (`Function`) from `Super` (`Function`) which can be
+modified without affecting the original class.
 
 ## License
 

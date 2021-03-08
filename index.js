@@ -1,14 +1,9 @@
-'use strict'
-
-var xtend = require('xtend')
-var inherits = require('inherits')
-
-module.exports = unherit
+import inherits from 'inherits'
 
 // Create a custom constructor which can be modified without affecting the
 // original class.
-function unherit(Super) {
-  var result
+export function unherit(Super) {
+  var proto
   var key
   var value
 
@@ -16,13 +11,15 @@ function unherit(Super) {
   inherits(From, Of)
 
   // Clone values.
-  result = Of.prototype
+  proto = Of.prototype
 
-  for (key in result) {
-    value = result[key]
+  // We specifically want to get *all* fields, not just own fields.
+  // eslint-disable-next-line guard-for-in
+  for (key in proto) {
+    value = proto[key]
 
     if (value && typeof value === 'object') {
-      result[key] = 'concat' in value ? value.concat() : xtend(value)
+      proto[key] = 'concat' in value ? value.concat() : Object.assign({}, value)
     }
   }
 
@@ -36,10 +33,8 @@ function unherit(Super) {
 
   // Constructor accepting variadic arguments.
   function Of() {
-    if (!(this instanceof Of)) {
-      return new From(arguments)
-    }
-
-    return Super.apply(this, arguments)
+    return this instanceof Of
+      ? Super.apply(this, arguments)
+      : new From(arguments)
   }
 }

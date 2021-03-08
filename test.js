@@ -1,8 +1,6 @@
-'use strict'
-
-var EventEmitter = require('events').EventEmitter
-var test = require('tape')
-var unherit = require('.')
+import {EventEmitter} from 'events'
+import test from 'tape'
+import {unherit} from './index.js'
 
 test('unherit(Super)', function (t) {
   var Emitter = unherit(EventEmitter)
@@ -59,6 +57,7 @@ test('unherit(Super)', function (t) {
 
   D.prototype = new Proto()
   D.prototype.values = [1, 2, 3]
+  D.prototype.object = {a: true}
 
   E = unherit(D)
 
@@ -74,8 +73,10 @@ test('unherit(Super)', function (t) {
 
   F = unherit(D)
 
-  t.deepEqual(F.prototype.values, [1, 2, 3], 'shouldn clone values (1)')
-  t.deepEqual(new F().values, [1, 2, 3], 'shouldn clone values (2)')
+  t.deepEqual(F.prototype.values, [1, 2, 3], 'should clone values (1)')
+  t.deepEqual(new F().values, [1, 2, 3], 'should clone values (2)')
+
+  t.deepEqual(new F().object, {a: true}, 'should clone values (3)')
 
   t.end()
 })
