@@ -9,7 +9,9 @@ test('unherit(Super)', function (t) {
 
   Emitter.prototype.defaultMaxListeners = 0
 
+  // @ts-ignore
   t.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)')
+  // @ts-ignore
   t.equal(new EventEmitter().defaultMaxListeners, undefined, 'should work (2)')
 
   t.equal(new Emitter().constructor, Emitter, 'should work (3)')
@@ -31,8 +33,7 @@ test('unherit(Super)', function (t) {
 
   var B = unherit(A)
 
-  // eslint-disable-next-line new-cap
-  var b = B('foo', 'bar', 'baz')
+  var b = new B('foo', 'bar', 'baz')
 
   t.ok(b instanceof A, 'should fool `instanceof` without `new` (1)')
   t.ok(b instanceof B, 'should fool `instanceof` without `new` (2)')

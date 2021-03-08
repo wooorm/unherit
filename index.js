@@ -4,11 +4,9 @@ import inherits from 'inherits'
  * Create a custom constructor which can be modified without affecting the
  * original class.
  *
- * @template Instance
- * @template Args
- * @template {{ new(...Args): Instance }} Class
+ * @template {{ new(...args: any): any }} Class
  * @param {Class} Super
- * @return {(new(...Args) => Instance) & ((...Args) => Instance)}
+ * @return {new(...args: ConstructorParameters<Class>) => InstanceType<Class>}
  */
 export function unherit(Super) {
   var proto
