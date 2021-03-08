@@ -1,5 +1,13 @@
 import inherits from 'inherits'
 
+/**
+ * Create a custom constructor which can be modified without affecting the
+ * original class.
+ *
+ * @template {Function} Class
+ * @param {Class} Super
+ * @returns {Class}
+ */
 export function unherit(Super) {
   var proto
   var key
@@ -23,21 +31,25 @@ export function unherit(Super) {
 
   return Of
 
-  /** Constructor accepting a single argument, which itself is an `arguments`
+  /**
+   * Constructor accepting a single argument, which itself is an `arguments`
    * object.
    *
-   * @param {any[]} parameters
+   * @param {IArguments} parameters
    * @returns {any}
    */
   function From(parameters) {
     return Super.apply(this, parameters)
   }
 
-  // Constructor accepting variadic arguments.
+  /**
+   * Constructor accepting variadic arguments.
+   *
+   * @returns {any}
+   */
   function Of() {
     return this instanceof Of
       ? Super.apply(this, arguments)
-      : // @ts-ignore it’s wrong.
-        new From(arguments)
+      : new From(arguments)
   }
 }
