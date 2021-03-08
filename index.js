@@ -4,7 +4,7 @@ import inherits from 'inherits'
  * Create a custom constructor which can be modified without affecting the
  * original class.
  *
- * @template {{ new(...args: any): any }} Class
+ * @template {{ new (...args: any): any }} Class
  * @param {Class} Super
  * @return {new(...args: ConstructorParameters<Class>) => InstanceType<Class>}
  */
@@ -35,8 +35,10 @@ export function unherit(Super) {
   /**
    * Constructor accepting a single argument, which itself is an `arguments`
    * object.
-   * @class
+   *
+   * @constructor
    * @param {IArguments} parameters
+   * @return {InstanceType<Class>}
    */
   function From(parameters) {
     return Super.apply(this, parameters)
@@ -45,8 +47,7 @@ export function unherit(Super) {
   /**
    * Constructor accepting variadic arguments.
    *
-   * @class
-   * @this {Class}
+   * @return {InstanceType<Class>}
    */
   function Of() {
     return this instanceof Of
