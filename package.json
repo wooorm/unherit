@@ -31,6 +31,7 @@
     "inherits": "^2.0.0"
   },
   "devDependencies": {
+    "@types/inherits": "^0.0.30",
     "@types/tape": "^4.0.0",
     "c8": "^7.0.0",
     "prettier": "^2.0.0",
@@ -45,7 +46,7 @@
     "prepublishOnly": "npm run build",
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "prebuild": "rimraf \"*.d.ts\"",
-    "build": "# tsc",
+    "build": "tsc",
     "test-api": "node test",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov node test.js",
     "test": "npm run build && npm run format && npm run test-coverage"
