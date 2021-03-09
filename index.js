@@ -4,10 +4,10 @@ import inherits from 'inherits'
  * Create a custom constructor which can be modified without affecting the
  * original class.
  *
- * @template {{ new(...args: Args): Instance }} Class
+ * @template {{new(...args: Args): Instance}} Class
  * @template {any[]} Args
  * @template Instance
- * @param {Class & { new (...args: Args): Instance }} Super
+ * @param {Class & {new (...args: Args): Instance}} Super
  * @return {Class & ((...args: Args) => Instance)}
  */
 export function unherit(Super) {
