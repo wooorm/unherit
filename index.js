@@ -4,9 +4,11 @@ import inherits from 'inherits'
  * Create a custom constructor which can be modified without affecting the
  * original class.
  *
- * @template {Function} Class
- * @param {Class} Super
- * @returns {Class}
+ * @template {{ new(...args: Args): Instance }} Class
+ * @template {any[]} Args
+ * @template Instance
+ * @param {Class & { new (...args: Args): Instance }} Super
+ * @return {Class & ((...args: Args) => Instance)}
  */
 export function unherit(Super) {
   var proto
@@ -29,14 +31,16 @@ export function unherit(Super) {
     }
   }
 
+  // @ts-ignore inherits above ensures that attributes will match
   return Of
 
   /**
    * Constructor accepting a single argument, which itself is an `arguments`
    * object.
    *
+   * @constructor
    * @param {IArguments} parameters
-   * @returns {any}
+   * @return {Instance}
    */
   function From(parameters) {
     return Super.apply(this, parameters)
@@ -45,7 +49,7 @@ export function unherit(Super) {
   /**
    * Constructor accepting variadic arguments.
    *
-   * @returns {any}
+   * @return {Instance}
    */
   function Of() {
     return this instanceof Of
