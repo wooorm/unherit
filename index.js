@@ -1,5 +1,3 @@
-import inherits from 'inherits'
-
 /**
  * Create a custom constructor which can be modified without affecting the
  * original class.
@@ -15,8 +13,8 @@ export function unherit(Super) {
   var key
   var value
 
-  inherits(Of, Super)
-  inherits(From, Of)
+  // @ts-expect-error hush
+  const Of = class extends Super {}
 
   // Clone values.
   proto = Of.prototype
@@ -31,29 +29,6 @@ export function unherit(Super) {
     }
   }
 
-  // @ts-ignore inherits above ensures that attributes will match
+  // @ts-expect-error `extends` above ensures that attributes will match
   return Of
-
-  /**
-   * Constructor accepting a single argument, which itself is an `arguments`
-   * object.
-   *
-   * @constructor
-   * @param {IArguments} parameters
-   * @return {Instance}
-   */
-  function From(parameters) {
-    return Super.apply(this, parameters)
-  }
-
-  /**
-   * Constructor accepting variadic arguments.
-   *
-   * @return {Instance}
-   */
-  function Of() {
-    return this instanceof Of
-      ? Super.apply(this, arguments)
-      : new From(arguments)
-  }
 }

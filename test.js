@@ -39,9 +39,7 @@ test('unherit(Super)', function (t) {
 
   var B = unherit(A)
 
-  // @ts-ignore typescript wants new used with constructor
-  // eslint-disable-next-line new-cap
-  var b = B('foo', 'bar', 'baz')
+  var b = new B('foo', 'bar', 'baz')
 
   t.ok(b instanceof A, 'should fool `instanceof` without `new` (1)')
   t.ok(b instanceof B, 'should fool `instanceof` without `new` (2)')

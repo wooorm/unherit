@@ -27,11 +27,7 @@
     "index.d.ts",
     "index.js"
   ],
-  "dependencies": {
-    "inherits": "^2.0.0"
-  },
   "devDependencies": {
-    "@types/inherits": "^0.0.30",
     "@types/tape": "^4.0.0",
     "c8": "^7.0.0",
     "prettier": "^2.0.0",
