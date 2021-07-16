@@ -9,15 +9,13 @@
  * @return {Class & ((...args: Args) => Instance)}
  */
 export function unherit(Super) {
-  var proto
-  var key
-  var value
-
   // @ts-expect-error hush
   const Of = class extends Super {}
 
   // Clone values.
-  proto = Of.prototype
+  const proto = Of.prototype
+  let key
+  let value
 
   // We specifically want to get *all* fields, not just own fields.
   // eslint-disable-next-line guard-for-in

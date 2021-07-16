@@ -36,7 +36,7 @@
     "rimraf": "^3.0.0",
     "tape": "^5.0.0",
     "typescript": "^4.0.0",
-    "xo": "^0.38.0"
+    "xo": "^0.39.0"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
@@ -56,12 +56,7 @@
     "trailingComma": "none"
   },
   "xo": {
-    "prettier": true,
-    "rules": {
-      "no-var": "off",
-      "prefer-arrow-callback": "off",
-      "unicorn/prefer-reflect-apply": "off"
-    }
+    "prettier": true
   },
   "remarkConfig": {
     "plugins": [

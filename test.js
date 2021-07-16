@@ -2,8 +2,8 @@ import {EventEmitter} from 'events'
 import test from 'tape'
 import {unherit} from './index.js'
 
-test('unherit(Super)', function (t) {
-  var Emitter = unherit(EventEmitter)
+test('unherit(Super)', (t) => {
+  let Emitter = unherit(EventEmitter)
 
   t.equal(Emitter.prototype.defaultMaxListeners, undefined)
 
@@ -20,38 +20,32 @@ test('unherit(Super)', function (t) {
   Emitter = unherit(EventEmitter)
 
   t.ok(new Emitter() instanceof EventEmitter, 'should fool `instanceof` checks')
-  /**
-   * Constructor which internally uses an `instanceof` check.
-   *
-   * @constructor
-   * @param {string} one
-   * @param {string} two
-   * @param {string} three
-   */
-  function A(one, two, three) {
-    t.equal(one, 'foo')
-    t.equal(two, 'bar')
-    t.equal(three, 'baz')
-    t.ok(this instanceof A)
 
-    this.values = [].slice.call(arguments)
+  class A {
+    /**
+     * Constructor which internally uses an `instanceof` check.
+     *
+     * @constructor
+     * @param {string} one
+     * @param {string} two
+     * @param {string} three
+     */
+    constructor(one, two, three) {
+      t.equal(one, 'foo')
+      t.equal(two, 'bar')
+      t.equal(three, 'baz')
+      t.ok(this instanceof A)
+
+      this.values = [].slice.call(arguments)
+    }
   }
 
-  var B = unherit(A)
+  const B = unherit(A)
+  const b = new B('foo', 'bar', 'baz')
 
-  var b = new B('foo', 'bar', 'baz')
-
-  t.ok(b instanceof A, 'should fool `instanceof` without `new` (1)')
-  t.ok(b instanceof B, 'should fool `instanceof` without `new` (2)')
-
-  t.deepEqual(
-    b.values,
-    ['foo', 'bar', 'baz'],
-    'should fool `instanceof` without `new` (3)'
-  )
-
-  var E
-  var F
+  t.ok(b instanceof A, 'should support classes (1)')
+  t.ok(b instanceof B, 'should support classes (2)')
+  t.deepEqual(b.values, ['foo', 'bar', 'baz'], 'support classes (3)')
 
   function C() {}
 
@@ -66,7 +60,7 @@ test('unherit(Super)', function (t) {
   D.prototype.values = [1, 2, 3]
   D.prototype.object = {a: true}
 
-  E = unherit(D)
+  const E = unherit(D)
 
   // This failed in 1.0.4
   t.deepEqual(
@@ -78,7 +72,7 @@ test('unherit(Super)', function (t) {
 
   E.prototype.values.push(4)
 
-  F = unherit(D)
+  const F = unherit(D)
 
   t.deepEqual(F.prototype.values, [1, 2, 3], 'should clone values (1)')
   t.deepEqual(new F().values, [1, 2, 3], 'should clone values (2)')
