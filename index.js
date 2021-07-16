@@ -2,31 +2,29 @@
  * Create a custom constructor which can be modified without affecting the
  * original class.
  *
- * @template {{new(...args: Args): Instance}} Class
- * @template {any[]} Args
- * @template Instance
- * @param {Class & {new (...args: Args): Instance}} Super
- * @return {Class & ((...args: Args) => Instance)}
+ * @template {{prototype: object, new (...args: any[]): any}} Class
+ * @param {Class} Super
+ * @return {Class}
  */
 export function unherit(Super) {
-  // @ts-expect-error hush
   const Of = class extends Super {}
 
   // Clone values.
   const proto = Of.prototype
+  /** @type {string} */
   let key
-  let value
 
   // We specifically want to get *all* fields, not just own fields.
   // eslint-disable-next-line guard-for-in
   for (key in proto) {
-    value = proto[key]
+    /** @type {unknown} */
+    const value = proto[key]
 
     if (value && typeof value === 'object') {
+      // @ts-expect-error: shallow clone arrays or other values.
       proto[key] = 'concat' in value ? value.concat() : Object.assign({}, value)
     }
   }
 
-  // @ts-expect-error `extends` above ensures that attributes will match
   return Of
 }

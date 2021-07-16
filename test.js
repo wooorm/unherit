@@ -5,13 +5,14 @@ import {unherit} from './index.js'
 test('unherit(Super)', (t) => {
   let Emitter = unherit(EventEmitter)
 
+  // @ts-expect-error: TS is wrong, it does exist.
   t.equal(Emitter.prototype.defaultMaxListeners, undefined)
-
+  // @ts-expect-error: TS is wrong, it does exist.
   Emitter.prototype.defaultMaxListeners = 0
 
-  // @ts-ignore
+  // @ts-expect-error
   t.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)')
-  // @ts-ignore
+  // @ts-expect-error
   t.equal(new EventEmitter().defaultMaxListeners, undefined, 'should work (2)')
 
   t.equal(new Emitter().constructor, Emitter, 'should work (3)')
@@ -35,8 +36,8 @@ test('unherit(Super)', (t) => {
       t.equal(two, 'bar')
       t.equal(three, 'baz')
       t.ok(this instanceof A)
-
-      this.values = [].slice.call(arguments)
+      /** @type {unknown[]} */
+      this.values = [one, two, three]
     }
   }
 
@@ -47,17 +48,20 @@ test('unherit(Super)', (t) => {
   t.ok(b instanceof B, 'should support classes (2)')
   t.deepEqual(b.values, ['foo', 'bar', 'baz'], 'support classes (3)')
 
+  /** @type {(() => void) & {prototype: {values: unknown[]}}} */
   function C() {}
 
+  // TS doesn’t like `prototype`s.
+  // type-coverage:ignore-next-line
   C.prototype.values = [1, 2]
 
-  function Proto() {}
+  class Proto extends C {}
 
   function D() {}
-  Proto.prototype = C.prototype
 
   D.prototype = new Proto()
   D.prototype.values = [1, 2, 3]
+  // @ts-expect-error: correct, it does not exist.
   D.prototype.object = {a: true}
 
   const E = unherit(D)
