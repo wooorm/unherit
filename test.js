@@ -1,4 +1,4 @@
-import {EventEmitter} from 'events'
+import {EventEmitter} from 'node:events'
 import test from 'tape'
 import {unherit} from './index.js'
 
