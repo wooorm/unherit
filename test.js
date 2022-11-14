@@ -1,26 +1,34 @@
 import {EventEmitter} from 'node:events'
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {unherit} from './index.js'
 
-test('unherit(Super)', (t) => {
+test('unherit(Super)', () => {
   let Emitter = unherit(EventEmitter)
 
   // @ts-expect-error: TS is wrong, it does exist.
-  t.equal(Emitter.prototype.defaultMaxListeners, undefined)
+  assert.equal(Emitter.prototype.defaultMaxListeners, undefined)
   // @ts-expect-error: TS is wrong, it does exist.
   Emitter.prototype.defaultMaxListeners = 0
 
   // @ts-expect-error
-  t.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)')
-  // @ts-expect-error
-  t.equal(new EventEmitter().defaultMaxListeners, undefined, 'should work (2)')
+  assert.equal(new Emitter().defaultMaxListeners, 0, 'should work (1)')
+  assert.equal(
+    // @ts-expect-error
+    new EventEmitter().defaultMaxListeners,
+    undefined,
+    'should work (2)'
+  )
 
-  t.equal(new Emitter().constructor, Emitter, 'should work (3)')
-  t.equal(new EventEmitter().constructor, EventEmitter, 'should work (4)')
+  assert.equal(new Emitter().constructor, Emitter, 'should work (3)')
+  assert.equal(new EventEmitter().constructor, EventEmitter, 'should work (4)')
 
   Emitter = unherit(EventEmitter)
 
-  t.ok(new Emitter() instanceof EventEmitter, 'should fool `instanceof` checks')
+  assert.ok(
+    new Emitter() instanceof EventEmitter,
+    'should fool `instanceof` checks'
+  )
 
   class A {
     /**
@@ -32,10 +40,10 @@ test('unherit(Super)', (t) => {
      * @param {string} three
      */
     constructor(one, two, three) {
-      t.equal(one, 'foo')
-      t.equal(two, 'bar')
-      t.equal(three, 'baz')
-      t.ok(this instanceof A)
+      assert.equal(one, 'foo')
+      assert.equal(two, 'bar')
+      assert.equal(three, 'baz')
+      assert.ok(this instanceof A)
       /** @type {unknown[]} */
       this.values = [one, two, three]
     }
@@ -44,9 +52,9 @@ test('unherit(Super)', (t) => {
   const B = unherit(A)
   const b = new B('foo', 'bar', 'baz')
 
-  t.ok(b instanceof A, 'should support classes (1)')
-  t.ok(b instanceof B, 'should support classes (2)')
-  t.deepEqual(b.values, ['foo', 'bar', 'baz'], 'support classes (3)')
+  assert.ok(b instanceof A, 'should support classes (1)')
+  assert.ok(b instanceof B, 'should support classes (2)')
+  assert.deepEqual(b.values, ['foo', 'bar', 'baz'], 'support classes (3)')
 
   /** @type {(() => void) & {prototype: {values: unknown[]}}} */
   function C() {}
@@ -67,21 +75,23 @@ test('unherit(Super)', (t) => {
   const E = unherit(D)
 
   // This failed in 1.0.4
-  t.deepEqual(
+  assert.deepEqual(
     E.prototype.values,
     [1, 2, 3],
     'shouldn’t fail on inheritance (1)'
   )
-  t.deepEqual(new E().values, [1, 2, 3], 'shouldn’t fail on inheritance (2)')
+  assert.deepEqual(
+    new E().values,
+    [1, 2, 3],
+    'shouldn’t fail on inheritance (2)'
+  )
 
   E.prototype.values.push(4)
 
   const F = unherit(D)
 
-  t.deepEqual(F.prototype.values, [1, 2, 3], 'should clone values (1)')
-  t.deepEqual(new F().values, [1, 2, 3], 'should clone values (2)')
+  assert.deepEqual(F.prototype.values, [1, 2, 3], 'should clone values (1)')
+  assert.deepEqual(new F().values, [1, 2, 3], 'should clone values (2)')
 
-  t.deepEqual(new F().object, {a: true}, 'should clone values (3)')
-
-  t.end()
+  assert.deepEqual(new F().object, {a: true}, 'should clone values (3)')
 })
