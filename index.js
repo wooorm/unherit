@@ -1,6 +1,5 @@
 /**
- * Create a custom constructor which can be modified without affecting the
- * original class.
+ * Create a subclass that can be modified without affecting the super class.
  *
  * @template {{prototype: object, new (...args: any[]): any}} Class
  * @param {Class} Super

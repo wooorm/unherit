@@ -1,7 +1,7 @@
 {
   "name": "unherit",
   "version": "3.0.0",
-  "description": "Clone a constructor without affecting the super-class",
+  "description": "Create a subclass that can be modified without affecting the super class",
   "license": "MIT",
   "keywords": [
     "clone",
