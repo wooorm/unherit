@@ -1,6 +1,6 @@
 {
   "name": "unherit",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Create a subclass that can be modified without affecting the super class",
   "license": "MIT",
   "keywords": [
